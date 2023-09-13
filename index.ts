@@ -1,11 +1,11 @@
 import express, { Express, Request, Response, Application } from "express";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.ts";
+import { connectDB } from "./config/db";
 import path from "path";
 
 //For env File
-// dotenv.config();
-dotenv.config({ path: "./config/config.env" });
+dotenv.config();
+// dotenv.config({ path: "./config/config.env" });
 
 // Connect to database
 connectDB();
