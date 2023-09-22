@@ -1,7 +1,10 @@
-import express, { Express, Request, Response, Application } from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 import { connectDB } from "./config/db";
-import path from "path";
+
+// Route files
+import { usersRouter }  from "./routes/usersRoutes"
 
 //For env File
 dotenv.config();
@@ -10,12 +13,14 @@ dotenv.config();
 // Connect to database
 connectDB();
 
+// Create the express app
 const app: Application = express();
+
+// Parse requests of content-type - application/json
+app.use(bodyParser.json());
 const port = process.env.PORT || 8000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to Express & TypeScript Server");
-});
+app.use("/api/v1/users", usersRouter)
 
 app.listen(port, () => {
   console.log(`Server is Fire at http://localhost:${port}`);
